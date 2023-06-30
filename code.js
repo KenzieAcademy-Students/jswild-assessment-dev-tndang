@@ -2,3 +2,11 @@
 // and select "Open with Live Server"
 
 // Your Code Here.
+function userLocation(location) {
+    let latitude = location.coords.latitude;
+    let longitude = location.coords.longitude;
+
+    document.write(`Latitude: ${latitude} Longitude: ${longitude}`)
+}
+
+navigator.geolocation.getCurrentPosition(userLocation);
