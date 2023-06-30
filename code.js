@@ -9,4 +9,9 @@ function userLocation(location) {
     document.write(`Latitude: ${latitude} Longitude: ${longitude}`)
 }
 
-navigator.geolocation.getCurrentPosition(userLocation);
+if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(userLocation);
+} else {
+    document.write(`Sorry we are unable to detect your location... Did you know the Latitude and Longitude of Tokyo, Japan is 35.6762° N, 139.6503° E?`)
+}
+
