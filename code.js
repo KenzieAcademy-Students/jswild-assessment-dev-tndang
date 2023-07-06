@@ -31,7 +31,9 @@ let searchButton = document.getElementById("searchButton");
 searchButton.addEventListener("click", () => {
     fetch(`https://api.flickr.com`, () => {
         fetch(`https://flickr.com/services/rest/?api_key=437662e6f4e7a651726c9ca1aa27b022&format=json&nojsoncallback=1&method=flickr.photos.search&safe_search=1&per_page=5&lat=${latitude}&lon=${longitude}.1579024&text=${imageSearchBar.value}`, (response) => {
-            return imageUrl;
+            fetch(`https://flickr.com/photos/`, response.body, () => {
+                return imageUrl;
+            })
         })
     }
 )
