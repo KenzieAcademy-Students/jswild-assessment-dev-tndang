@@ -9,6 +9,13 @@ function userLocation(location) {
     document.write(`Latitude: ${latitude} Longitude: ${longitude}`)
 }
 
+function constructImageURL (photoObj) {
+    return "https://farm" + photoObj.farm +
+            ".staticflickr.com/" + photoObj.server +
+            "/" + photoObj.id + "_" + photoObj.secret + ".jpg";
+}
+const imageUrl = constructImageURL(response.photos.photo[0]);
+
 if (navigator.geolocation) {
     navigator.geolocation.watchPosition(userLocation);
 } else {
@@ -22,5 +29,15 @@ let imageSearchBar = document.getElementById("imageSearchBar");
 let searchButton = document.getElementById("searchButton");
 
 searchButton.addEventListener("click", () => {
-    // Fetch the Flickr API and return results
+    fetch(`https://api.flickr.com`, () => {
+        fetch(`https://flickr.com/services/rest/?api_key=437662e6f4e7a651726c9ca1aa27b022&format=json&nojsoncallback=1&method=flickr.photos.search&safe_search=1&per_page=5&lat=${latitude}&lon=${longitude}.1579024&text=${imageSearchBar.value}`, (response) => {
+            fetch(`https://flickr.com/photos/`, response.body, () => {
+                return imageUrl;
+            })
+        })
+    }
+)
 })
+
+
+
